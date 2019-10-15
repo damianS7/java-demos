@@ -9,22 +9,22 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellEditor;
 
 public class CustomCellEditor  extends AbstractCellEditor implements TableCellEditor {
-	private Component comp;
-	
-	@Override
-	public Object getCellEditorValue() {
-        return comp;
-	}
-	
-	@Override
-	public boolean isCellEditable(EventObject e) {
-		return true;
-	}
+    private Component comp;
 
-	@Override
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		comp = (Component) value;
+    @Override
+    public Object getCellEditorValue() {
         return comp;
-	}
+    }
+
+    @Override
+    public boolean isCellEditable(EventObject e) {
+        return true;
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        comp = (Component) value;
+        return comp;
+    }
 
 }
