@@ -13,73 +13,24 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DraggeablePanel extends JPanel implements DraggeableComponent {
-    private List<File> draggedFiles;
+public class DraggeablePanel extends DraggeableComponent {
     private JLabel label;
-    public DraggeablePanel() {
-        super();
-        DropTarget dt = new DropTarget(this, this);
-        label =new JLabel("drop something here");
-        add(label);
+    
+    public DraggeablePanel(JPanel panel) {
+        super(panel);
+        label = new JLabel("drop something here");
+        DropTarget dt = new DropTarget(panel, this);
+        panel.add(label);
     }
     
     // Que hacer cuando se arrastra un fichero a la ventana
-    protected void dragTrigger() {
+    @Override
+    public void dropTrigger() {
         // Loop them through
         for (File file : draggedFiles) {
             label.setText(file.getName());
         }
     }
     
-    
-    @Override
-    public void drop(DropTargetDropEvent dtde) {
-        Transferable transferable = dtde.getTransferable();
-        // Accept copy drops
-        dtde.acceptDrop(DnDConstants.ACTION_COPY);
 
-        // Get the data formats of the dropped item
-        DataFlavor[] flavors = dtde.getTransferable().getTransferDataFlavors();
-
-        // Loop through the flavors
-        for (DataFlavor flavor : flavors) {
-            try {
-                // If the drop items are files
-                if (flavor.isFlavorJavaFileListType()) {
-                    // Get all of the dropped files
-                    draggedFiles = (List<File>) transferable.getTransferData(flavor);
-                    dragTrigger();
-                }
-            } catch (Exception e) {
-                // Print out the error stack
-                e.printStackTrace();
-            }
-        }
-        // Inform that the drop is complete
-        dtde.dropComplete(true);
-    }
-
-    @Override
-    public void dragEnter(DropTargetDragEvent dtde) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void dragOver(DropTargetDragEvent dtde) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void dropActionChanged(DropTargetDragEvent dtde) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void dragExit(DropTargetEvent dte) {
-        // TODO Auto-generated method stub
-        
-    }
 }

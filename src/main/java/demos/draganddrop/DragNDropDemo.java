@@ -3,7 +3,12 @@ package demos.draganddrop;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.dnd.DropTarget;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,11 +29,15 @@ public class DragNDropDemo {
         scrollPane.setBounds(0, 0, 438, 179);
         frame.getContentPane().add(scrollPane);
         
-        DraggeableTextArea textArea = new DraggeableTextArea();
+        JTextArea textArea = new JTextArea();
         textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
         scrollPane.setViewportView(textArea);
+        DraggeableTextArea dta = new DraggeableTextArea(textArea);
         
-        DraggeablePanel panel = new DraggeablePanel();
+        JPanel panel = new JPanel();
+        DraggeablePanel dp = new DraggeablePanel(panel);
+
         panel.setBounds(0, 191, 438, 216);
         frame.getContentPane().add(panel);
         
