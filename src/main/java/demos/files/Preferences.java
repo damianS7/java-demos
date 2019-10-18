@@ -48,6 +48,10 @@ public class Preferences {
     public void setProperty(String key, String value) {
         properties.setProperty(key, value);
     }
+    
+    public String getProperty(String key) {
+	return properties.getProperty(key);
+    }
 
     public void print() {
         for (Entry<Object, Object> entry : properties.entrySet()) {
